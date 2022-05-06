@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>siroi-简单的人脸检测</title>
+</head>
+<video id="face" width="400" height="300" style="position: absolute;object-fit:fill;"></video>
+<img id="img" style="top: 500px; left: 300px; position: absolute;">
+<script src="main.js"></script>
+<script>
+    let face = new SiroiFace.Face(document.getElementById('face'));
+    let img = document.getElementById("img")
+    const init = async () => {
+        let init = await face.init();
+        console.log(init)
+        if(init!='init') return false;
+        setInterval(async () => {
+            let picture = await face.draw();
+            img.src = face.createPicture(picture[0]);
+        }, 1000)
+    }
+    init();
+</script>
+
+<body>
+
+</body>
+
+</html>
